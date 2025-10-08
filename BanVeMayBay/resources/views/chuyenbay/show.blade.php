@@ -7,31 +7,45 @@
   <table class="table table-bordered">
     <tr>
       <th>Mã chuyến bay</th>
-      <td>{{ $chuyen_bay->ma_chuyen }}</td>
+      <td>{{ $chuyenBay->ma_chuyen }}</td>
     </tr>
     <tr>
-      <th>Nơi đi</th>
-      <td>{{ $chuyen_bay->noi_di }}</td>
+      <th>Sân bay đi</th>
+      <td>{{ $chuyenBay->san_bay_di }}</td>
     </tr>
     <tr>
-      <th>Nơi đến</th>
-      <td>{{ $chuyen_bay->noi_den }}</td>
+      <th>Sân bay đến</th>
+      <td>{{ $chuyenBay->san_bay_den }}</td>
     </tr>
     <tr>
-      <th>Ngày giờ khởi hành</th>
-      <td>{{ \Carbon\Carbon::parse($chuyen_bay->ngay_gio_khoi_hanh)->format('d/m/Y H:i') }}</td>
+      <th>Thời gian đi</th>
+      <td>{{ \Carbon\Carbon::parse($chuyenBay->thoi_gian_di)->format('d/m/Y H:i') }}</td>
+    </tr>
+    <tr>
+      <th>Thời gian đến</th>
+      <td>
+        @if($chuyenBay->thoi_gian_den)
+          {{ \Carbon\Carbon::parse($chuyenBay->thoi_gian_den)->format('d/m/Y H:i') }}
+        @else
+          <em>Chưa cập nhật</em>
+        @endif
+      </td>
     </tr>
     <tr>
       <th>Giá vé</th>
-      <td>{{ number_format($chuyen_bay->gia_ve, 0, ',', '.') }} ₫</td>
+      <td>{{ number_format($chuyenBay->gia, 0, ',', '.') }} ₫</td>
+    </tr>
+    <tr>
+      <th>Tổng số ghế</th>
+      <td>{{ $chuyenBay->so_ghe }}</td>
     </tr>
     <tr>
       <th>Số ghế còn</th>
-      <td>{{ $chuyen_bay->so_ghe_con }}</td>
+      <td>{{ $chuyenBay->so_ghe_con }}</td>
     </tr>
   </table>
 
-  <a href="{{ route('chuyen-bay.edit', $chuyen_bay->id) }}" class="btn btn-warning">Sửa</a>
+  <a href="{{ route('chuyen-bay.edit', $chuyenBay->id) }}" class="btn btn-warning">Sửa</a>
   <a href="{{ route('chuyen-bay.index') }}" class="btn btn-secondary">Quay lại danh sách</a>
 </div>
 @endsection

@@ -5,9 +5,15 @@ use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\VeController;
 
 
+
 Route::get('/', function () {
     return redirect()->route('chuyen-bay.index');
 });
+
+Route::post('/test-form', function() {
+    return 'Form đã gửi thành công!';
+});
+
 
 // resource routes với param name rõ ràng để route-model-binding hoạt động
 Route::resource('chuyen-bay', ChuyenBayController::class)

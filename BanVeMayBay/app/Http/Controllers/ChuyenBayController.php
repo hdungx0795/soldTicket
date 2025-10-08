@@ -50,7 +50,7 @@ class ChuyenBayController extends Controller
      */
     public function show(ChuyenBay $chuyenBay)
     {
-        return view('chuyenbay.show', compact('chuyen_bay'));
+        return view('chuyenbay.show', compact('chuyenBay'));
     }
 
     /**
@@ -58,7 +58,7 @@ class ChuyenBayController extends Controller
      */
     public function edit(ChuyenBay $chuyenBay)
     {
-         return view('chuyenbay.edit', compact('chuyen_bay'));
+         return view('chuyenbay.edit', compact('chuyenBay'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ChuyenBayController extends Controller
     public function update(Request $request, ChuyenBay $chuyenBay)
     {
         $data = $request->validate([
-            'ma_chuyen' => 'required|unique:chuyen_bays,ma_chuyen,' . $chuyen_bay->id,
+            'ma_chuyen' => 'required|unique:chuyen_bays,ma_chuyen,' . $chuyenBay->id,
             'san_bay_di' => 'required',
             'san_bay_den' => 'required',
             'thoi_gian_di' => 'required|date',
@@ -77,13 +77,13 @@ class ChuyenBayController extends Controller
         ]);
 
         // nếu giảm số ghế, cập nhật so_ghe_con tương ứng (đơn giản)
-        if ($data['so_ghe'] < $chuyen_bay->so_ghe) {
-            $chuyen_bay->so_ghe_con = min($chuyen_bay->so_ghe_con, $data['so_ghe']);
+        if ($data['so_ghe'] < $chuyenBay->so_ghe) {
+            $chuyenBay->so_ghe_con = min($chuyenBay->so_ghe_con, $data['so_ghe']);
         } else {
-            $chuyen_bay->so_ghe_con += ($data['so_ghe'] - $chuyen_bay->so_ghe);
+            $chuyenBay->so_ghe_con += ($data['so_ghe'] - $chuyenBay->so_ghe);
         }
 
-        $chuyen_bay->update($data);
+        $chuyenBay->update($data);
 
         return redirect()->route('chuyen-bay.index')->with('success', 'Cập nhật thành công');
     }
@@ -93,7 +93,7 @@ class ChuyenBayController extends Controller
      */
     public function destroy(ChuyenBay $chuyenBay)
     {
-        $chuyen_bay->delete();
+        $chuyenBay->delete();
         return redirect()->route('chuyen-bay.index')->with('success', 'Xóa thành công');
     }
 }
