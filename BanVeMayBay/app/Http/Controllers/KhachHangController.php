@@ -46,7 +46,7 @@ class KhachHangController extends Controller
      */
     public function show(KhachHang $khachHang)
     {
-        return view('khachhang.show', compact('khach_hang'));
+        return view('khachHang.show', compact('khachHang'));
     }
 
     /**
@@ -54,7 +54,7 @@ class KhachHangController extends Controller
      */
     public function edit(KhachHang $khachHang)
     {
-        return view('khachhang.edit', compact('khach_hang'));
+        return view('khachHang.edit', compact('khachHang'));
     }
 
     /**
@@ -64,11 +64,11 @@ class KhachHangController extends Controller
     {
         $data = $request->validate([
             'ho_ten' => 'required|string|max:100',
-            'email' => 'required|email|unique:khach_hangs,email,' . $khach_hang->id,
+            'email' => 'required|email|unique:khach_hangs,email,' . $khachHang->id,
             'so_dt' => 'nullable|string|max:20',
         ]);
 
-        $khach_hang->update($data);
+        $khachHang->update($data);
 
         return redirect()->route('khach-hang.index')
                          ->with('success', 'Cập nhật khách hàng thành công!');
@@ -79,7 +79,7 @@ class KhachHangController extends Controller
      */
     public function destroy(KhachHang $khachHang)
     {
-        $khach_hang->delete();
+        $khachHang->delete();
 
         return redirect()->route('khach-hang.index')
                          ->with('success', 'Xóa khách hàng thành công!');
